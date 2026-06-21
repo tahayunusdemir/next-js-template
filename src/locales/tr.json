@@ -1,0 +1,53 @@
+{
+  "RootLayout": {
+    "home_link": "Ana sayfa",
+    "counter_link": "Sayaç",
+    "sign_in_link": "Giriş yap",
+    "sign_up_link": "Kayıt ol"
+  },
+  "BaseTemplate": {
+    "description": "Tailwind CSS ile Next.js projeniz için başlangıç kodu",
+    "footer_text": "© {year} {name}.",
+    "main_navigation_label": "Ana navigasyon"
+  },
+  "Index": {
+    "meta_title": "Ana sayfa",
+    "meta_description": "Tailwind CSS ile Next.js projeniz için başlangıç kodu.",
+    "title": "Hoş geldiniz",
+    "description": "Bu sizin başlangıç ana sayfanız. Uygulamanızı buradan oluşturmaya başlayın."
+  },
+  "Counter": {
+    "meta_title": "Sayaç",
+    "meta_description": "Bir veritabanı işlemi örneği"
+  },
+  "CounterForm": {
+    "presentation": "Sayaç veritabanında saklanır ve verdiğiniz değer kadar artırılır.",
+    "label_increment": "Şu kadar artır",
+    "button_increment": "Artır",
+    "error_increment_range": "Değer 1 ile 3 arasında olmalıdır"
+  },
+  "CurrentCount": {
+    "count": "Sayı: {count}"
+  },
+  "SignIn": {
+    "meta_title": "Giriş yap",
+    "meta_description": "Hesabınıza kolayca giriş yapın."
+  },
+  "SignUp": {
+    "meta_title": "Kayıt ol",
+    "meta_description": "Sezgisel kayıt sürecimizle kolayca bir hesap oluşturun."
+  },
+  "Dashboard": {
+    "hello_message": "Merhaba {email}!"
+  },
+  "DashboardLayout": {
+    "meta_title": "Kontrol paneli",
+    "meta_description": "Hesabınızı kontrol panelinden yönetin.",
+    "dashboard_link": "Kontrol paneli",
+    "user_profile_link": "Hesabınızı yönetin",
+    "sign_out": "Çıkış yap"
+  },
+  "LocaleSwitcher": {
+    "change_language": "Dili değiştir"
+  }
+}
