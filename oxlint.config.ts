@@ -6,6 +6,14 @@ import vitest from 'ultracite/oxlint/vitest';
 
 export default defineConfig({
   extends: [core, react, next, vitest],
+  // Vendored shadcn/ui output: keep upstream code as-is instead of linting generated files
+  ignorePatterns: [
+    'src/components/ui/**',
+    'src/components/data-table.tsx',
+    'src/components/chart-area-interactive.tsx',
+    'src/hooks/use-mobile.ts',
+    'src/lib/utils.ts',
+  ],
   rules: {
     'no-warning-comments': 'off', // Allow TODO and FIXME comments
     'no-inline-comments': 'off', // Allow nearby comments

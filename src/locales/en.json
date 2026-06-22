@@ -37,9 +37,6 @@
     "meta_title": "Sign up",
     "meta_description": "Effortlessly create an account through our intuitive sign-up process."
   },
-  "Dashboard": {
-    "hello_message": "Hello {email}!"
-  },
   "DashboardLayout": {
     "meta_title": "Dashboard",
     "meta_description": "Manage your account from the dashboard.",
@@ -49,5 +46,11 @@
   },
   "LocaleSwitcher": {
     "change_language": "Change language"
+  },
+  "ModeToggle": {
+    "toggle_theme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

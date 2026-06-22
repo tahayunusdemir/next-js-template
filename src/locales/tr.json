@@ -37,9 +37,6 @@
     "meta_title": "Kayıt ol",
     "meta_description": "Sezgisel kayıt sürecimizle kolayca bir hesap oluşturun."
   },
-  "Dashboard": {
-    "hello_message": "Merhaba {email}!"
-  },
   "DashboardLayout": {
     "meta_title": "Kontrol paneli",
     "meta_description": "Hesabınızı kontrol panelinden yönetin.",
@@ -49,5 +46,11 @@
   },
   "LocaleSwitcher": {
     "change_language": "Dili değiştir"
+  },
+  "ModeToggle": {
+    "toggle_theme": "Temayı değiştir",
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem"
   }
 }

@@ -1,20 +1,24 @@
-import { currentUser } from '@clerk/nextjs/server';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
+import { ChartAreaInteractive } from '@/components/chart-area-interactive';
+import { DataTable } from '@/components/data-table';
+import { SectionCards } from '@/components/section-cards';
+import data from './data.json';
 
 export default async function DashboardPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = await getTranslations('Dashboard');
-  const user = await currentUser();
 
   return (
-    <div className="py-5 [&_p]:my-6">
-      <p>
-        {`👋 `}
-        {t('hello_message', {
-          email: user?.primaryEmailAddress?.emailAddress ?? '',
-        })}
-      </p>
+    <div className="flex flex-1 flex-col">
+      <div className="@container/main flex flex-1 flex-col gap-2">
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <SectionCards />
+          <div className="px-4 lg:px-6">
+            <ChartAreaInteractive />
+          </div>
+          <DataTable data={data} />
+        </div>
+      </div>
     </div>
   );
 }
