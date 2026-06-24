@@ -42,13 +42,29 @@
     "meta_description": "Hesabınızı kontrol panelinden yönetin.",
     "dashboard_link": "Kontrol paneli",
     "user_profile_link": "Hesabınızı yönetin",
-    "sign_out": "Çıkış yap"
+    "quick_create": "Hızlı oluştur",
+    "inbox": "Gelen kutusu",
+    "settings": "Ayarlar",
+    "feedback": "Geri bildirim",
+    "feedback_title": "Geri bildirim gönder",
+    "feedback_description": "Düşüncelerini paylaş veya bir sorun bildir.",
+    "feedback_placeholder": "Aklındakileri yaz",
+    "feedback_cancel": "İptal",
+    "feedback_send": "Gönder",
+    "theme": "Tema",
+    "language": "Dil",
+    "home_page": "Ana sayfa",
+    "upgrade_to_pro": "Pro'ya yükselt",
+    "sign_out": "Çıkış yap",
+    "search": "Ara",
+    "search_placeholder": "Sayfalarda ara…",
+    "search_empty": "Sonuç bulunamadı.",
+    "pages": "Sayfalar"
   },
   "LocaleSwitcher": {
     "change_language": "Dili değiştir"
   },
   "ModeToggle": {
-    "toggle_theme": "Temayı değiştir",
     "light": "Açık",
     "dark": "Koyu",
     "system": "Sistem"

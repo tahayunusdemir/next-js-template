@@ -12,6 +12,11 @@ const config: KnipConfig = {
   ignoreDependencies: [
     '@clerk/shared',
     '@swc/helpers', // Avoid error in CI: "`npm ci` can only install packages when your package.json and package-lock.json or npm-shrinkwrap.json are in sync."
+    // Only consumed by vendored shadcn/ui primitives (ignored above), so Knip can't see their usage
+    'embla-carousel-react',
+    'input-otp',
+    'react-day-picker',
+    'react-resizable-panels',
   ],
   // Include custom Playwright test file suffixes
   playwright: {

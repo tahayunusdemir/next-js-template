@@ -7,8 +7,18 @@ export default async function UserProfilePage(props: { params: Promise<{ locale:
   setRequestLocale(locale);
 
   return (
-    <div className="my-6 lg:-ml-12">
-      <UserProfile path={getI18nPath('/dashboard/user-profile', locale)} />
+    <div className="flex flex-1 flex-col p-4 md:p-6">
+      <div className="w-full max-w-5xl">
+        <UserProfile
+          path={getI18nPath('/dashboard/user-profile', locale)}
+          appearance={{
+            elements: {
+              rootBox: 'w-full',
+              cardBox: 'w-full max-w-none shadow-none',
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

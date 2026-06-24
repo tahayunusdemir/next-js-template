@@ -42,13 +42,29 @@
     "meta_description": "Manage your account from the dashboard.",
     "dashboard_link": "Dashboard",
     "user_profile_link": "Manage your account",
-    "sign_out": "Sign out"
+    "quick_create": "Quick create",
+    "inbox": "Inbox",
+    "settings": "Settings",
+    "feedback": "Feedback",
+    "feedback_title": "Send feedback",
+    "feedback_description": "Share your thoughts or report an issue.",
+    "feedback_placeholder": "Tell us what's on your mind",
+    "feedback_cancel": "Cancel",
+    "feedback_send": "Send",
+    "theme": "Theme",
+    "language": "Language",
+    "home_page": "Home page",
+    "upgrade_to_pro": "Upgrade to Pro",
+    "sign_out": "Sign out",
+    "search": "Search",
+    "search_placeholder": "Search pages…",
+    "search_empty": "No results found.",
+    "pages": "Pages"
   },
   "LocaleSwitcher": {
     "change_language": "Change language"
   },
   "ModeToggle": {
-    "toggle_theme": "Toggle theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
