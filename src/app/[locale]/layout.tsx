@@ -6,9 +6,11 @@ import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
 import { routing } from '@/libs/I18nRouting';
+import { getBaseUrl } from '@/utils/Helpers';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getBaseUrl()),
   icons: [
     {
       rel: 'apple-touch-icon',
@@ -57,7 +59,7 @@ export default async function RootLayout(props: {
   return (
     <html
       lang={locale}
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <body>
