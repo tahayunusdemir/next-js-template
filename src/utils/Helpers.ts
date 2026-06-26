@@ -26,3 +26,21 @@ export const getI18nPath = (url: string, locale: string) => {
 
   return `/${locale}${url}`;
 };
+
+/**
+ * Derives up to two uppercase initials from a display name for avatar fallbacks.
+ * @param name The display name or handle to abbreviate.
+ * @returns One or two initials, or an empty string when the name has no letters.
+ */
+export const getInitials = (name: string) => {
+  const parts = name.trim().split(/\s+/u).filter(Boolean);
+
+  if (parts.length === 0) {
+    return '';
+  }
+
+  const first = parts[0]?.[0] ?? '';
+  const last = parts.length > 1 ? (parts.at(-1)?.[0] ?? '') : '';
+
+  return `${first}${last}`.toUpperCase();
+};

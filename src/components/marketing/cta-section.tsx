@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Mascot } from '@/components/marketing/mascot';
+import { Reveal } from '@/components/marketing/reveal';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from '@/libs/I18nNavigation';
@@ -11,7 +12,7 @@ export function CtaSection() {
   return (
     <section className="border-b border-dashed py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center ring-1 ring-foreground/10 sm:px-16">
+        <Reveal className="relative overflow-hidden rounded-3xl border bg-card px-6 py-16 text-center ring-1 ring-foreground/10 sm:px-16">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_80%_at_50%_0%,var(--color-foreground)/8%,transparent_70%)]"
@@ -48,7 +49,7 @@ export function CtaSection() {
             </Link>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">{t('note')}</p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

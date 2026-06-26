@@ -67,7 +67,7 @@ export function HeroSection() {
               <ArrowRightIcon className="transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
-              href="/about#contact"
+              href="/#how-it-works"
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'lg' }),
                 'w-full rounded-full px-6 transition-transform hover:-translate-y-0.5 sm:w-auto',

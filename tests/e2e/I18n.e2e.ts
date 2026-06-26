@@ -2,22 +2,24 @@ import { expect, test } from '@playwright/test';
 
 test.describe('I18n', () => {
   test.describe('Language Switching', () => {
-    test('should switch language from English to Turkish using dropdown and verify text on the homepage', async ({
+    test('should switch language from English to Turkish using the toggle and verify text on the homepage', async ({
       page,
     }) => {
       await page.goto('/');
 
       await expect(
         page.getByRole('heading', {
-          name: 'Welcome',
+          name: 'cinema persona',
+          level: 1,
         }),
       ).toBeVisible();
 
-      await page.getByLabel('Change language').selectOption('tr');
+      await page.getByRole('button', { name: 'TR', exact: true }).click();
 
       await expect(
         page.getByRole('heading', {
-          name: 'Hoş geldiniz',
+          name: 'sinema kişiliğini',
+          level: 1,
         }),
       ).toBeVisible();
     });

@@ -17,8 +17,6 @@ if (!process.env.NEXT_PUBLIC_SENTRY_DISABLED) {
       }),
       Sentry.consoleLoggingIntegration(),
       Sentry.browserTracingIntegration(),
-
-      ...(process.env.NODE_ENV === 'development' ? [Sentry.spotlightBrowserIntegration()] : []),
     ],
 
     // Adds request headers and IP for users, for more info visit

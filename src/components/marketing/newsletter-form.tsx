@@ -32,7 +32,6 @@ export function NewsletterForm() {
       <div className="flex items-center gap-2">
         <Input
           type="email"
-          placeholder={t('placeholder')}
           aria-label={t('aria_label')}
           aria-invalid={form.formState.errors.email ? true : undefined}
           className="rounded-full"

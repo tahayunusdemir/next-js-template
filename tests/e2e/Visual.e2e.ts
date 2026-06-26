@@ -7,17 +7,10 @@ test.describe('Visual testing', () => {
 
       await expect(
         page.getByRole('heading', {
-          name: 'Welcome',
+          name: 'cinema persona',
+          level: 1,
         }),
       ).toBeVisible();
-
-      await takeSnapshot(page, testInfo);
-    });
-
-    test('should take screenshot of the counter page', async ({ page }, testInfo) => {
-      await page.goto('/counter');
-
-      await expect(page.getByText('Count:')).toBeVisible();
 
       await takeSnapshot(page, testInfo);
     });
@@ -27,7 +20,8 @@ test.describe('Visual testing', () => {
 
       await expect(
         page.getByRole('heading', {
-          name: 'Hoş geldiniz',
+          name: 'sinema kişiliğini',
+          level: 1,
         }),
       ).toBeVisible();
 

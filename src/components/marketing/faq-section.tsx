@@ -1,13 +1,14 @@
 import {
-  CreditCardIcon,
-  HeadsetIcon,
-  PlugIcon,
-  RefreshCwIcon,
-  RocketIcon,
-  ShieldCheckIcon,
+  DatabaseIcon,
+  FilmIcon,
+  PopcornIcon,
+  SparklesIcon,
+  UsersIcon,
+  WalletIcon,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Reveal } from '@/components/marketing/reveal';
 import { Section, SectionHeading } from '@/components/marketing/section';
 import {
   Accordion,
@@ -20,12 +21,12 @@ import { cn } from '@/lib/utils';
 import { Link } from '@/libs/I18nNavigation';
 
 const icons: LucideIcon[] = [
-  RocketIcon,
-  CreditCardIcon,
-  RefreshCwIcon,
-  ShieldCheckIcon,
-  PlugIcon,
-  HeadsetIcon,
+  SparklesIcon,
+  WalletIcon,
+  FilmIcon,
+  UsersIcon,
+  PopcornIcon,
+  DatabaseIcon,
 ];
 
 export function FaqSection() {
@@ -44,10 +45,10 @@ export function FaqSection() {
     <Section id="faq">
       <SectionHeading badge={t('badge')} title={t('title')} subtitle={t('subtitle')} />
 
-      <div className="mx-auto mt-12 max-w-3xl">
+      <Reveal className="mx-auto mt-12 max-w-3xl">
         <Accordion>
           {items.map((item, index) => {
-            const Icon = icons[index] ?? RocketIcon;
+            const Icon = icons[index] ?? SparklesIcon;
             return (
               <AccordionItem key={item.question} value={item.question}>
                 <AccordionTrigger>
@@ -76,7 +77,7 @@ export function FaqSection() {
             {t('support_cta')}
           </Link>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }

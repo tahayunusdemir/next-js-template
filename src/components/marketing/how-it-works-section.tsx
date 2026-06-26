@@ -1,6 +1,7 @@
-import { PlugZapIcon, RocketIcon, Wand2Icon } from 'lucide-react';
+import { ClipboardListIcon, CompassIcon, SparklesIcon } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { RevealGroup, RevealItem } from '@/components/marketing/reveal';
 import { Section, SectionHeading } from '@/components/marketing/section';
 
 function Step(props: { index: number; icon: LucideIcon; title: string; description: string }) {
@@ -23,9 +24,9 @@ export function HowItWorksSection() {
   const t = useTranslations('HowItWorks');
 
   const steps = [
-    { icon: PlugZapIcon, title: t('connect_title'), description: t('connect_description') },
-    { icon: Wand2Icon, title: t('build_title'), description: t('build_description') },
-    { icon: RocketIcon, title: t('launch_title'), description: t('launch_description') },
+    { icon: ClipboardListIcon, title: t('test_title'), description: t('test_description') },
+    { icon: SparklesIcon, title: t('type_title'), description: t('type_description') },
+    { icon: CompassIcon, title: t('match_title'), description: t('match_description') },
   ];
 
   return (
@@ -37,17 +38,18 @@ export function HowItWorksSection() {
           aria-hidden
           className="absolute inset-x-0 top-7 -z-10 mx-auto hidden h-px max-w-2xl bg-border md:block"
         />
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+        <RevealGroup className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
           {steps.map((step, index) => (
-            <Step
-              key={step.title}
-              index={index + 1}
-              icon={step.icon}
-              title={step.title}
-              description={step.description}
-            />
+            <RevealItem key={step.title}>
+              <Step
+                index={index + 1}
+                icon={step.icon}
+                title={step.title}
+                description={step.description}
+              />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </Section>
   );

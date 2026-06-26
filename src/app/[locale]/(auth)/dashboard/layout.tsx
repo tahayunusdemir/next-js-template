@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { AppSidebar } from '@/components/app-sidebar';
+import { NotificationBell } from '@/components/notifications/notification-bell';
 import { SiteHeader } from '@/components/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -39,7 +40,7 @@ export default async function DashboardLayout(props: DashboardLayoutProps) {
       >
         <AppSidebar variant="inset" />
         <SidebarInset>
-          <SiteHeader />
+          <SiteHeader notifications={<NotificationBell locale={locale} />} />
           {props.children}
         </SidebarInset>
       </SidebarProvider>

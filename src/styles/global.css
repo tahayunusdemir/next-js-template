@@ -70,6 +70,8 @@
 
   --color-primary: var(--primary);
 
+  --color-brand-gold: var(--brand-gold);
+
   --color-popover-foreground: var(--popover-foreground);
 
   --color-popover: var(--popover);
@@ -113,6 +115,8 @@
   --primary: oklch(0.205 0 0);
 
   --primary-foreground: oklch(0.985 0 0);
+
+  --brand-gold: oklch(0.68 0.108 75);
 
   --secondary: oklch(0.97 0 0);
 
@@ -179,6 +183,8 @@
   --primary: oklch(0.922 0 0);
 
   --primary-foreground: oklch(0.205 0 0);
+
+  --brand-gold: oklch(0.83 0.115 85);
 
   --secondary: oklch(0.269 0 0);
 
@@ -276,9 +282,26 @@
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes cine-zoom {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@utility animate-cine-zoom {
+  animation: cine-zoom 2.2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
-  .animate-float {
+  .animate-float,
+  .animate-cine-zoom {
     animation: none;
   }
 }

@@ -34,24 +34,31 @@ function PlanCell(props: { value: Cell; highlight?: boolean }) {
 export function ComparisonSection() {
   const t = useTranslations('Comparison');
 
-  const rows: { label: string; starter: Cell; pro: Cell; business: Cell }[] = [
+  const rows: { id: string; label: string; values: [Cell, Cell, Cell, Cell] }[] = [
+    { id: 'discover', label: t('row_discover'), values: [true, true, true, true] },
     {
-      label: t('row_workflows'),
-      starter: '3',
-      pro: t('value_unlimited'),
-      business: t('value_unlimited'),
+      id: 'match',
+      label: t('row_match'),
+      values: [t('value_weekly'), t('value_daily'), t('value_unlimited'), t('value_unlimited')],
     },
-    { label: t('row_runs'), starter: '1K', pro: '50K', business: t('value_unlimited') },
+    { id: 'see_who_liked', label: t('row_see_who_liked'), values: [false, true, true, true] },
+    { id: 'advanced_filters', label: t('row_advanced_filters'), values: [false, true, true, true] },
+    { id: 'ad_free', label: t('row_ad_free'), values: [false, true, true, true] },
     {
-      label: t('row_analytics'),
-      starter: t('value_basic'),
-      pro: t('value_advanced'),
-      business: t('value_advanced'),
+      id: 'priority_matching',
+      label: t('row_priority_matching'),
+      values: [false, true, true, true],
     },
-    { label: t('row_roles'), starter: false, pro: true, business: true },
-    { label: t('row_support'), starter: false, pro: true, business: true },
-    { label: t('row_sso'), starter: false, pro: false, business: true },
-    { label: t('row_audit'), starter: false, pro: false, business: true },
+    { id: 'private_groups', label: t('row_private_groups'), values: [false, false, true, true] },
+    { id: 'movie_night', label: t('row_movie_night'), values: [false, false, true, true] },
+    { id: 'profile_boost', label: t('row_profile_boost'), values: [false, false, true, true] },
+    { id: 'ai', label: t('row_ai'), values: [false, false, true, true] },
+    { id: 'early_access', label: t('row_early_access'), values: [false, false, true, true] },
+    { id: 'exclusive', label: t('row_exclusive'), values: [false, false, false, true] },
+    { id: 'events', label: t('row_events'), values: [false, false, false, true] },
+    { id: 'elite_badge', label: t('row_elite_badge'), values: [false, false, false, true] },
+    { id: 'support', label: t('row_support'), values: [false, false, false, true] },
+    { id: 'invitations', label: t('row_invitations'), values: [false, false, false, true] },
   ];
 
   return (
@@ -62,20 +69,22 @@ export function ComparisonSection() {
           <TableHeader>
             <TableRow className="hover:bg-transparent">
               <TableHead className="w-[40%]">{t('col_feature')}</TableHead>
-              <TableHead className="text-center">{t('col_starter')}</TableHead>
+              <TableHead className="text-center">{t('col_free')}</TableHead>
               <TableHead className="bg-muted/40 text-center text-foreground">
-                {t('col_pro')}
+                {t('col_plus')}
               </TableHead>
-              <TableHead className="text-center">{t('col_business')}</TableHead>
+              <TableHead className="text-center">{t('col_pro')}</TableHead>
+              <TableHead className="text-center">{t('col_elite')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.label}>
+              <TableRow key={row.id}>
                 <TableCell className="font-medium">{row.label}</TableCell>
-                <PlanCell value={row.starter} />
-                <PlanCell value={row.pro} highlight />
-                <PlanCell value={row.business} />
+                <PlanCell value={row.values[0]} />
+                <PlanCell value={row.values[1]} highlight />
+                <PlanCell value={row.values[2]} />
+                <PlanCell value={row.values[3]} />
               </TableRow>
             ))}
           </TableBody>

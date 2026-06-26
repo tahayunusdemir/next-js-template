@@ -17,9 +17,45 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
+  // Large feature areas live in their own per-locale files (src/locales/<area>/)
+  // to keep each message file readable; all of them are merged into one message tree.
+  const [
+    base,
+    cineType,
+    marketing,
+    dashboard,
+    cineTest,
+    community,
+    films,
+    profile,
+    cineMatch,
+    achievements,
+  ] = await Promise.all([
+    import(`../locales/${locale}.json`),
+    import(`../locales/cinetype/${locale}.json`),
+    import(`../locales/marketing/${locale}.json`),
+    import(`../locales/dashboard/${locale}.json`),
+    import(`../locales/cinetest/${locale}.json`),
+    import(`../locales/community/${locale}.json`),
+    import(`../locales/films/${locale}.json`),
+    import(`../locales/profile/${locale}.json`),
+    import(`../locales/cinematch/${locale}.json`),
+    import(`../locales/achievements/${locale}.json`),
+  ]);
+
   return {
     locale,
-    // oxlint-disable-next-line unicorn/no-await-expression-member
-    messages: (await import(`../locales/${locale}.json`)).default,
+    messages: {
+      ...base.default,
+      ...cineType.default,
+      ...marketing.default,
+      ...dashboard.default,
+      ...cineTest.default,
+      ...community.default,
+      ...films.default,
+      ...profile.default,
+      ...cineMatch.default,
+      ...achievements.default,
+    },
   };
 });

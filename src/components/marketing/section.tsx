@@ -1,4 +1,6 @@
+import { Reveal } from '@/components/marketing/reveal';
 import { Badge } from '@/components/ui/badge';
+import { DashedLine } from '@/components/ui/dashed-line';
 import { cn } from '@/lib/utils';
 
 // Consistent vertical rhythm, max-width and dashed divider for marketing sections.
@@ -9,15 +11,13 @@ export function Section(props: {
   children: React.ReactNode;
 }) {
   return (
-    <section
-      id={props.id}
-      className={cn('scroll-mt-24 border-b border-dashed py-20 sm:py-28', props.className)}
-    >
+    <section id={props.id} className={cn('relative scroll-mt-24 py-20 sm:py-28', props.className)}>
       <div
         className={cn('mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8', props.containerClassName)}
       >
         {props.children}
       </div>
+      <DashedLine className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" />
     </section>
   );
 }
@@ -30,7 +30,7 @@ export function SectionHeading(props: {
   className?: string;
 }) {
   return (
-    <div className={cn('mx-auto max-w-2xl text-center', props.className)}>
+    <Reveal className={cn('mx-auto max-w-2xl text-center', props.className)}>
       {props.badge ? (
         <Badge variant="outline" className="mb-4">
           {props.badge}
@@ -44,6 +44,6 @@ export function SectionHeading(props: {
           {props.subtitle}
         </p>
       ) : null}
-    </div>
+    </Reveal>
   );
 }

@@ -1,6 +1,8 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
+  // Standalone scripts invoked manually via the CLI (e.g. tsx src/scripts/…)
+  entry: ['src/scripts/**/*.ts'],
   // Files to exclude from Knip analysis
   ignore: [
     'checkly.config.ts',

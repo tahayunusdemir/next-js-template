@@ -38,6 +38,8 @@ export function ThemeToggleGroup() {
         <button
           key={option.value}
           type="button"
+          aria-pressed={mounted && theme === option.value}
+          aria-label={labels[option.value]}
           onClick={() => {
             setTheme(option.value);
           }}
@@ -47,7 +49,6 @@ export function ThemeToggleGroup() {
           )}
         >
           <option.icon className="size-3.5" />
-          <span className="sr-only">{labels[option.value]}</span>
         </button>
       ))}
     </div>

@@ -1,25 +1,25 @@
 import {
-  SiAsana,
-  SiFigma,
-  SiGithub,
-  SiLinear,
-  SiNotion,
-  SiStripe,
-  SiVercel,
-  SiZapier,
+  SiImdb,
+  SiLetterboxd,
+  SiMubi,
+  SiNetflix,
+  SiPlex,
+  SiRottentomatoes,
+  SiThemoviedatabase,
+  SiTrakt,
 } from '@icons-pack/react-simple-icons';
 import { useTranslations } from 'next-intl';
 
-// Real brand marks rendered monochrome (Simple Icons) for an authentic logo cloud.
+// Real brand marks rendered monochrome (Simple Icons) for an authentic film logo cloud.
 const logos = [
-  { Icon: SiNotion, name: 'Notion' },
-  { Icon: SiLinear, name: 'Linear' },
-  { Icon: SiGithub, name: 'GitHub' },
-  { Icon: SiVercel, name: 'Vercel' },
-  { Icon: SiFigma, name: 'Figma' },
-  { Icon: SiStripe, name: 'Stripe' },
-  { Icon: SiZapier, name: 'Zapier' },
-  { Icon: SiAsana, name: 'Asana' },
+  { Icon: SiThemoviedatabase, name: 'TMDB' },
+  { Icon: SiImdb, name: 'IMDb' },
+  { Icon: SiLetterboxd, name: 'Letterboxd' },
+  { Icon: SiRottentomatoes, name: 'Rotten Tomatoes' },
+  { Icon: SiNetflix, name: 'Netflix' },
+  { Icon: SiMubi, name: 'MUBI' },
+  { Icon: SiTrakt, name: 'Trakt' },
+  { Icon: SiPlex, name: 'Plex' },
 ];
 
 export function LogoCloud() {

@@ -10,6 +10,18 @@ const handleI18nRouting = createMiddleware(routing);
 
 const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/:locale/dashboard(.*)']);
 
+// Public routes that still need Clerk's `auth()` available (e.g. per-user film status on
+// the films catalogue, follow/block actions on public profiles). Clerk runs here but
+// never forces sign-in — only protected routes do.
+const needsClerkContext = createRouteMatcher([
+  '/films(.*)',
+  '/:locale/films(.*)',
+  '/u(.*)',
+  '/:locale/u(.*)',
+  '/community(.*)',
+  '/:locale/community(.*)',
+]);
+
 const isAuthPage = createRouteMatcher([
   '/sign-in(.*)',
   '/:locale/sign-in(.*)',
@@ -43,7 +55,7 @@ export default async function proxy(request: NextRequest, event: NextFetchEvent)
   }
 
   // Clerk keyless mode doesn't work with i18n, this is why we need to run the middleware conditionally
-  if (isAuthPage(request) || isProtectedRoute(request)) {
+  if (isAuthPage(request) || isProtectedRoute(request) || needsClerkContext(request)) {
     // Match Clerk's documented middleware composition pattern, `return await` is not necessary.
     // oxlint-disable-next-line typescript/return-await
     return clerkMiddleware(async (auth, req) => {

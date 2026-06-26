@@ -1,18 +1,19 @@
 import {
   BarChart3Icon,
-  PlugIcon,
-  ShieldCheckIcon,
+  BookmarkIcon,
+  FilmIcon,
+  MessageCircleIcon,
+  SparklesIcon,
   UsersIcon,
-  WorkflowIcon,
-  ZapIcon,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { RevealGroup, RevealItem } from '@/components/marketing/reveal';
 import { Section, SectionHeading } from '@/components/marketing/section';
 import { cn } from '@/lib/utils';
 
-// Mini node diagram shown in the "workflows" feature tile.
-function WorkflowVisual() {
+// Mini node diagram shown in the "CineTest" feature tile, evoking the test flow.
+function TestFlowVisual() {
   return (
     <div
       aria-hidden
@@ -28,8 +29,8 @@ function WorkflowVisual() {
   );
 }
 
-// Mini bar chart shown in the "automation" feature tile.
-function AutomationVisual() {
+// Mini bar chart shown in the "taste profile" feature tile.
+function TasteBarsVisual() {
   return (
     <div
       aria-hidden
@@ -53,7 +54,7 @@ function FeatureCard(props: {
   return (
     <div
       className={cn(
-        'group flex flex-col rounded-xl border bg-card p-6 ring-1 ring-foreground/10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg',
+        'group flex h-full flex-col rounded-xl border bg-card p-6 ring-1 ring-foreground/10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg',
         props.className,
       )}
     >
@@ -73,44 +74,54 @@ export function FeaturesSection() {
   return (
     <Section id="features">
       <SectionHeading badge={t('badge')} title={t('title')} subtitle={t('subtitle')} />
-      <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <FeatureCard
-          icon={WorkflowIcon}
-          title={t('workflows_title')}
-          description={t('workflows_description')}
-          className="lg:col-span-2"
-        >
-          <WorkflowVisual />
-        </FeatureCard>
-        <FeatureCard
-          icon={BarChart3Icon}
-          title={t('analytics_title')}
-          description={t('analytics_description')}
-        />
-        <FeatureCard
-          icon={UsersIcon}
-          title={t('collaboration_title')}
-          description={t('collaboration_description')}
-        />
-        <FeatureCard
-          icon={ShieldCheckIcon}
-          title={t('security_title')}
-          description={t('security_description')}
-        />
-        <FeatureCard
-          icon={PlugIcon}
-          title={t('integrations_title')}
-          description={t('integrations_description')}
-        />
-        <FeatureCard
-          icon={ZapIcon}
-          title={t('automation_title')}
-          description={t('automation_description')}
-          className="lg:col-span-2"
-        >
-          <AutomationVisual />
-        </FeatureCard>
-      </div>
+      <RevealGroup className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <RevealItem className="lg:col-span-2">
+          <FeatureCard
+            icon={SparklesIcon}
+            title={t('cinetest_title')}
+            description={t('cinetest_description')}
+          >
+            <TestFlowVisual />
+          </FeatureCard>
+        </RevealItem>
+        <RevealItem>
+          <FeatureCard
+            icon={FilmIcon}
+            title={t('recommendations_title')}
+            description={t('recommendations_description')}
+          />
+        </RevealItem>
+        <RevealItem>
+          <FeatureCard
+            icon={UsersIcon}
+            title={t('matching_title')}
+            description={t('matching_description')}
+          />
+        </RevealItem>
+        <RevealItem>
+          <FeatureCard
+            icon={MessageCircleIcon}
+            title={t('community_title')}
+            description={t('community_description')}
+          />
+        </RevealItem>
+        <RevealItem>
+          <FeatureCard
+            icon={BookmarkIcon}
+            title={t('tracking_title')}
+            description={t('tracking_description')}
+          />
+        </RevealItem>
+        <RevealItem className="lg:col-span-2">
+          <FeatureCard
+            icon={BarChart3Icon}
+            title={t('profile_title')}
+            description={t('profile_description')}
+          >
+            <TasteBarsVisual />
+          </FeatureCard>
+        </RevealItem>
+      </RevealGroup>
     </Section>
   );
 }

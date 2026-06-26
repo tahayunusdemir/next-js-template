@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { RevealGroup, RevealItem } from '@/components/marketing/reveal';
 import { Section, SectionHeading } from '@/components/marketing/section';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
@@ -45,11 +46,13 @@ export function TestimonialsSection() {
   return (
     <Section id="testimonials">
       <SectionHeading badge={t('badge')} title={t('title')} subtitle={t('subtitle')} />
-      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <RevealGroup className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((item) => (
-          <TestimonialCard key={item.name} quote={item.quote} name={item.name} role={item.role} />
+          <RevealItem key={item.name} className="h-full">
+            <TestimonialCard quote={item.quote} name={item.name} role={item.role} />
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </Section>
   );
 }

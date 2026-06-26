@@ -1,6 +1,6 @@
 'use client';
 
-import { HomeIcon, LayoutDashboardIcon, SearchIcon, UserIcon } from 'lucide-react';
+import { HomeIcon, SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
@@ -12,8 +12,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from '@/components/ui/command';
 import { useRouter } from '@/libs/I18nNavigation';
+import { sidebarItems } from '@/navigation/sidebar-items';
 
 export function SearchDialog() {
   const t = useTranslations('DashboardLayout');
@@ -32,12 +34,6 @@ export function SearchDialog() {
       document.removeEventListener('keydown', down);
     };
   }, []);
-
-  const items = [
-    { title: t('dashboard_link'), url: '/dashboard/', icon: <LayoutDashboardIcon /> },
-    { title: t('user_profile_link'), url: '/dashboard/user-profile/', icon: <UserIcon /> },
-    { title: t('home_page'), url: '/', icon: <HomeIcon /> },
-  ];
 
   const handleSelect = (url: string) => {
     setOpen(false);
@@ -70,19 +66,42 @@ export function SearchDialog() {
           <CommandInput placeholder={t('search_placeholder')} />
           <CommandList>
             <CommandEmpty>{t('search_empty')}</CommandEmpty>
+            {sidebarItems.map((group, index) => (
+              <React.Fragment key={group.id}>
+                {index > 0 && <CommandSeparator />}
+                <CommandGroup heading={group.labelKey ? t(group.labelKey) : t('pages')}>
+                  {group.items.map((item) => {
+                    const title = t(item.titleKey);
+                    const Icon = item.icon;
+
+                    return (
+                      <CommandItem
+                        key={item.id}
+                        value={title}
+                        disabled={item.disabled}
+                        onSelect={() => {
+                          handleSelect(item.url);
+                        }}
+                      >
+                        <Icon />
+                        <span>{title}</span>
+                      </CommandItem>
+                    );
+                  })}
+                </CommandGroup>
+              </React.Fragment>
+            ))}
+            <CommandSeparator />
             <CommandGroup heading={t('pages')}>
-              {items.map((item) => (
-                <CommandItem
-                  key={item.url}
-                  value={item.title}
-                  onSelect={() => {
-                    handleSelect(item.url);
-                  }}
-                >
-                  {item.icon}
-                  <span>{item.title}</span>
-                </CommandItem>
-              ))}
+              <CommandItem
+                value={t('home_page')}
+                onSelect={() => {
+                  handleSelect('/');
+                }}
+              >
+                <HomeIcon />
+                <span>{t('home_page')}</span>
+              </CommandItem>
             </CommandGroup>
           </CommandList>
         </Command>

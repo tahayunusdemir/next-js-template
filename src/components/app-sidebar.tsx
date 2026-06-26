@@ -1,7 +1,6 @@
 'use client';
 
-import { CommandIcon, LayoutDashboardIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { CommandIcon } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -13,20 +12,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { Wordmark } from '@/components/wordmark';
 import { Link } from '@/libs/I18nNavigation';
-import { AppConfig } from '@/utils/AppConfig';
+import { sidebarItems } from '@/navigation/sidebar-items';
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
-  const t = useTranslations('DashboardLayout');
-
-  const navMain = [
-    {
-      title: t('dashboard_link'),
-      url: '/dashboard/',
-      icon: <LayoutDashboardIcon />,
-    },
-  ];
-
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -37,13 +27,13 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
               render={<Link href="/dashboard/" />}
             >
               <CommandIcon className="size-5!" />
-              <span className="text-base font-semibold">{AppConfig.name}</span>
+              <Wordmark className="text-base" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMain} />
+        <NavMain groups={sidebarItems} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

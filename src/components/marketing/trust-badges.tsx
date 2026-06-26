@@ -1,14 +1,14 @@
-import { ActivityIcon, BadgeCheckIcon, LockIcon, ShieldCheckIcon } from 'lucide-react';
+import { LockIcon, RotateCcwIcon, ShieldCheckIcon, SparklesIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export function TrustBadges() {
   const t = useTranslations('TrustBadges');
 
   const badges = [
-    { Icon: BadgeCheckIcon, label: t('soc2') },
+    { Icon: SparklesIcon, label: t('free_to_start') },
     { Icon: ShieldCheckIcon, label: t('gdpr') },
     { Icon: LockIcon, label: t('encrypted') },
-    { Icon: ActivityIcon, label: t('uptime') },
+    { Icon: RotateCcwIcon, label: t('cancel_anytime') },
   ];
 
   return (

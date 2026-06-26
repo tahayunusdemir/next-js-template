@@ -1,15 +1,13 @@
-import { SparklesIcon } from 'lucide-react';
+import Image from 'next/image';
+import { Wordmark } from '@/components/wordmark';
 import { cn } from '@/lib/utils';
-import { AppConfig } from '@/utils/AppConfig';
 
 // Wordmark used in the marketing header and footer.
 export function Brand(props: { className?: string }) {
   return (
     <span className={cn('flex items-center gap-2', props.className)}>
-      <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-        <SparklesIcon className="size-4" />
-      </span>
-      <span className="font-heading text-base font-semibold tracking-tight">{AppConfig.name}</span>
+      <Image src="/favicon-96x96.png" alt="" width={32} height={32} className="size-8" priority />
+      <Wordmark className="text-base" />
     </span>
   );
 }

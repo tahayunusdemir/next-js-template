@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { formatPrice, PLANS } from '@/lib/plans';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
 
@@ -20,11 +21,11 @@ export function StructuredData() {
     { question: tFaq('q6'), answer: tFaq('a6') },
   ];
 
-  const offers = [
-    { name: tPricing('starter_name'), price: '0' },
-    { name: tPricing('pro_name'), price: '29' },
-    { name: tPricing('business_name'), price: '99' },
-  ];
+  // Sourced from the plan catalog so JSON-LD prices never drift from the page.
+  const offers = PLANS.map((plan) => ({
+    name: tPricing(`${plan.id}_name`),
+    price: formatPrice(plan.monthly),
+  }));
 
   const graph = {
     '@context': 'https://schema.org',
@@ -34,7 +35,7 @@ export function StructuredData() {
         '@id': `${baseUrl}/#organization`,
         name: AppConfig.name,
         url: baseUrl,
-        sameAs: ['https://github.com', 'https://x.com', 'https://linkedin.com'],
+        sameAs: ['https://www.linkedin.com/company/cinepersona'],
       },
       {
         '@type': 'WebSite',

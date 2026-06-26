@@ -17,6 +17,7 @@ export function LanguageToggleGroup() {
         <button
           key={value}
           type="button"
+          aria-pressed={locale === value}
           onClick={() => {
             if (value === locale) {
               return;

@@ -14,19 +14,10 @@ test.describe('Sanity', () => {
 
       await expect(
         page.getByRole('heading', {
-          name: 'Welcome',
+          name: 'cinema persona',
+          level: 1,
         }),
       ).toBeVisible();
-    });
-
-    test('should navigate to the counter page', async ({ page }) => {
-      await page.goto('/');
-
-      await page.getByRole('link', { name: 'Counter' }).click();
-
-      await expect(page).toHaveURL(/counter$/u);
-
-      await expect(page.getByText('Count:')).toBeVisible();
     });
   });
 });

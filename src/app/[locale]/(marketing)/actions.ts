@@ -1,6 +1,9 @@
 'use server';
 
 import type * as z from 'zod';
+import { db } from '@/libs/DB';
+import { logger } from '@/libs/Logger';
+import { contactMessageSchema } from '@/models/Schema';
 import { ContactValidation, NewsletterValidation } from '@/validations/LeadValidation';
 
 export type LeadResult = { ok: boolean };
@@ -38,7 +41,8 @@ export async function sendContactMessage(
     return { ok: false };
   }
 
-  // TODO: persist the message or send it via an email/ticketing provider.
-  await Promise.resolve();
+  await db.insert(contactMessageSchema).values(parsed.data);
+  logger.info('Contact message stored');
+
   return { ok: true };
 }

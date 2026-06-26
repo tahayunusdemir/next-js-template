@@ -3,73 +3,32 @@
 import { ArrowRightIcon, CheckIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
+import { RevealGroup, RevealItem } from '@/components/marketing/reveal';
 import { Section, SectionHeading } from '@/components/marketing/section';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
+import { formatPrice, getMonthlyPrice, isPaidPlan, PLANS } from '@/lib/plans';
 import { cn } from '@/lib/utils';
 import { Link } from '@/libs/I18nNavigation';
 
 export function PricingSection(props: { showCompareLink?: boolean }) {
   const t = useTranslations('Pricing');
   const [annual, setAnnual] = React.useState(false);
+  const period = annual ? 'annual' : 'monthly';
 
-  const plans = [
-    {
-      key: 'starter',
-      name: t('starter_name'),
-      description: t('starter_description'),
-      monthly: 0,
-      annual: 0,
-      cta: t('starter_cta'),
-      href: '/sign-up',
-      popular: false,
-      includes: undefined as string | undefined,
-      features: [
-        t('starter_feature_1'),
-        t('starter_feature_2'),
-        t('starter_feature_3'),
-        t('starter_feature_4'),
-        t('starter_feature_5'),
-        t('starter_feature_6'),
-      ],
-    },
-    {
-      key: 'pro',
-      name: t('pro_name'),
-      description: t('pro_description'),
-      monthly: 29,
-      annual: 24,
-      cta: t('pro_cta'),
-      href: '/sign-up',
-      popular: true,
-      includes: t('pro_includes'),
-      features: [
-        t('pro_feature_1'),
-        t('pro_feature_2'),
-        t('pro_feature_3'),
-        t('pro_feature_4'),
-        t('pro_feature_5'),
-      ],
-    },
-    {
-      key: 'business',
-      name: t('business_name'),
-      description: t('business_description'),
-      monthly: 99,
-      annual: 79,
-      cta: t('business_cta'),
-      href: '/about#contact',
-      popular: false,
-      includes: t('business_includes'),
-      features: [
-        t('business_feature_1'),
-        t('business_feature_2'),
-        t('business_feature_3'),
-        t('business_feature_4'),
-        t('business_feature_5'),
-      ],
-    },
-  ];
+  // Paid tiers route into checkout with the active billing period; Free signs up directly.
+  const plans = PLANS.map((plan) => ({
+    key: plan.id,
+    name: t(`${plan.id}_name`),
+    description: t(`${plan.id}_description`),
+    monthly: plan.monthly,
+    yearly: plan.yearly,
+    cta: t(`${plan.id}_cta`),
+    href: isPaidPlan(plan) ? `/checkout?plan=${plan.id}&billing=${period}` : '/sign-up',
+    popular: plan.popular,
+    includes: plan.includesKey ? t(plan.includesKey) : undefined,
+    features: plan.features.map((key) => t(key)),
+  }));
 
   return (
     <Section id="pricing">
@@ -79,6 +38,7 @@ export function PricingSection(props: { showCompareLink?: boolean }) {
         <div className="inline-flex items-center rounded-full border p-1">
           <button
             type="button"
+            aria-pressed={!annual}
             onClick={() => {
               setAnnual(false);
             }}
@@ -91,6 +51,7 @@ export function PricingSection(props: { showCompareLink?: boolean }) {
           </button>
           <button
             type="button"
+            aria-pressed={annual}
             onClick={() => {
               setAnnual(true);
             }}
@@ -105,83 +66,100 @@ export function PricingSection(props: { showCompareLink?: boolean }) {
         <p className="text-sm text-muted-foreground">{t('billing_save')}</p>
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-5xl items-stretch gap-6 lg:grid-cols-3">
-        {plans.map((plan) => (
-          <div
-            key={plan.key}
-            className={cn(
-              'flex h-full flex-col rounded-2xl border bg-card p-6 ring-1 ring-foreground/10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg',
-              plan.popular &&
-                'border-transparent bg-primary text-primary-foreground shadow-xl ring-0 hover:shadow-2xl',
-            )}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="font-heading text-lg font-medium">{plan.name}</h3>
-              {plan.popular ? (
-                <Badge className="bg-primary-foreground text-primary">{t('most_popular')}</Badge>
-              ) : null}
-            </div>
-            <p
-              className={cn(
-                'mt-1 text-sm text-pretty',
-                plan.popular ? 'text-primary-foreground/70' : 'text-muted-foreground',
-              )}
-            >
-              {plan.description}
-            </p>
+      <RevealGroup className="mx-auto mt-12 grid max-w-6xl items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {plans.map((plan) => {
+          const monthlyEquivalent = getMonthlyPrice(plan, period);
 
-            <div className="mt-6 flex items-baseline gap-1">
-              <span className="font-heading text-4xl font-semibold tracking-tight">
-                ${annual ? plan.annual : plan.monthly}
-              </span>
-              <span
+          return (
+            <RevealItem key={plan.key} className="h-full">
+              <div
                 className={cn(
-                  'text-sm',
-                  plan.popular ? 'text-primary-foreground/70' : 'text-muted-foreground',
+                  'flex h-full flex-col rounded-2xl border bg-card p-6 ring-1 ring-foreground/10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg',
+                  plan.popular &&
+                    'border-transparent bg-primary text-primary-foreground shadow-xl ring-0 hover:shadow-2xl',
                 )}
               >
-                {t('per_month')}
-              </span>
-            </div>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-heading text-lg font-medium">{plan.name}</h3>
+                  {plan.popular ? (
+                    <Badge className="bg-primary-foreground text-primary">
+                      {t('most_popular')}
+                    </Badge>
+                  ) : null}
+                </div>
+                <p
+                  className={cn(
+                    'mt-1 text-sm text-pretty',
+                    plan.popular ? 'text-primary-foreground/70' : 'text-muted-foreground',
+                  )}
+                >
+                  {plan.description}
+                </p>
 
-            <Link
-              href={plan.href}
-              className={cn(
-                'mt-6 w-full rounded-full transition-transform hover:-translate-y-0.5',
-                plan.popular
-                  ? cn(
-                      buttonVariants({ size: 'lg' }),
-                      'border-transparent bg-background text-foreground hover:bg-background/90',
-                    )
-                  : buttonVariants({ variant: 'outline', size: 'lg' }),
-              )}
-            >
-              {plan.cta}
-            </Link>
-
-            <ul className="mt-6 space-y-3 text-sm">
-              {plan.includes ? <li className="font-medium">{plan.includes}</li> : null}
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2.5">
-                  <CheckIcon
-                    className={cn(
-                      'mt-0.5 size-4 shrink-0',
-                      plan.popular ? 'text-primary-foreground' : 'text-foreground',
-                    )}
-                  />
-                  <span
-                    className={
-                      plan.popular ? 'text-primary-foreground/80' : 'text-muted-foreground'
-                    }
-                  >
-                    {feature}
+                <div className="mt-6 flex items-baseline gap-1">
+                  <span className="font-heading text-4xl font-semibold tracking-tight">
+                    ${formatPrice(monthlyEquivalent)}
                   </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+                  <span
+                    className={cn(
+                      'text-sm',
+                      plan.popular ? 'text-primary-foreground/70' : 'text-muted-foreground',
+                    )}
+                  >
+                    {t('per_month')}
+                  </span>
+                </div>
+                <p
+                  className={cn(
+                    'mt-1 h-4 text-xs',
+                    plan.popular ? 'text-primary-foreground/60' : 'text-muted-foreground',
+                  )}
+                >
+                  {annual && plan.yearly > 0
+                    ? t('billed_annually', { price: formatPrice(plan.yearly) })
+                    : null}
+                </p>
+
+                <Link
+                  href={plan.href}
+                  className={cn(
+                    'mt-6 w-full rounded-full transition-transform hover:-translate-y-0.5',
+                    plan.popular
+                      ? cn(
+                          buttonVariants({ size: 'lg' }),
+                          'border-transparent bg-background text-foreground hover:bg-background/90',
+                        )
+                      : buttonVariants({ variant: 'outline', size: 'lg' }),
+                  )}
+                >
+                  {plan.cta}
+                </Link>
+
+                <ul className="mt-6 space-y-3 text-sm">
+                  {plan.includes ? <li className="font-medium">{plan.includes}</li> : null}
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2.5">
+                      <CheckIcon
+                        className={cn(
+                          'mt-0.5 size-4 shrink-0',
+                          plan.popular ? 'text-primary-foreground' : 'text-foreground',
+                        )}
+                      />
+                      <span
+                        className={
+                          plan.popular ? 'text-primary-foreground/80' : 'text-muted-foreground'
+                        }
+                      >
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </RevealItem>
+          );
+        })}
+      </RevealGroup>
 
       {props.showCompareLink ? (
         <div className="mt-10 text-center">

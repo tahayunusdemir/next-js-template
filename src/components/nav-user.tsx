@@ -41,8 +41,15 @@ export function NavUser() {
 
   const name = user?.fullName ?? user?.username ?? '';
   const email = user?.primaryEmailAddress?.emailAddress ?? '';
-  const avatar = user?.imageUrl ?? '';
-  const initials = name ? name.slice(0, 2).toUpperCase() : 'U';
+  const avatar = user?.imageUrl;
+  const initials =
+    name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase() || 'U';
 
   return (
     <SidebarMenu>
@@ -74,20 +81,14 @@ export function NavUser() {
                     <span className="truncate font-medium">{name}</span>
                     <span className="truncate text-xs text-muted-foreground">{email}</span>
                   </div>
-                  <Link
-                    href="/dashboard/user-profile/"
-                    className={cn(
-                      buttonVariants({ variant: 'ghost', size: 'icon-sm' }),
-                      'text-muted-foreground',
-                    )}
-                  >
-                    <SettingsIcon />
-                    <span className="sr-only">{t('settings')}</span>
-                  </Link>
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
+            <DropdownMenuItem render={<Link href="/dashboard/settings/" />}>
+              <SettingsIcon />
+              {t('settings_link')}
+            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
                 setFeedbackOpen(true);
@@ -96,6 +97,7 @@ export function NavUser() {
               <SmilePlusIcon />
               {t('feedback')}
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <div className="flex items-center justify-between px-1.5 py-1 text-sm">
               <span>{t('theme')}</span>
               <ThemeToggleGroup />
@@ -119,7 +121,7 @@ export function NavUser() {
               </DropdownMenuItem>
             </SignOutButton>
             <div className="p-1 pt-1.5">
-              <Link href="#" className={cn(buttonVariants(), 'w-full')}>
+              <Link href="/pricing" className={cn(buttonVariants(), 'w-full')}>
                 {t('upgrade_to_pro')}
               </Link>
             </div>
